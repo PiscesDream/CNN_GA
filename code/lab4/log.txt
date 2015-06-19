@@ -1,0 +1,15 @@
+000th  generation|  best fitness:   93.066667|  best child fitness: 93.066667
+000th  generation|  best:   array([7, 1, 5, 5])|    best child: array([7, 1, 5, 5])
+001th  generation|  best fitness:   93.400000|  best child fitness: 93.400000
+001th  generation|  best:   array([8, 4, 9, 5])|    best child: array([8, 4, 9, 5])
+002th  generation|  best fitness:   95.466667|  best child fitness: 95.466667
+002th  generation|  best:   array([8, 4, 9, 5])|    best child: array([8, 4, 9, 5])
+003th  generation|  best fitness:   95.466667|  best child fitness: 95.466667
+003th  generation|  best:   array([8, 4, 9, 5])|    best child: array([8, 4, 9, 5])
+004th  generation|  best fitness:   95.466667|  best child fitness: 95.466667
+004th  generation|  best:   array([8, 4, 9, 5])|    best child: array([8, 4, 9, 5])
+005th  generation|  best fitness:   95.466667|  best child fitness: 95.466667
+005th  generation|  best:   array([8, 4, 9, 5])|    best child: array([8, 4, 9, 5])
+006th  generation|  best fitness:   95.533333|  best child fitness: 95.533333
+006th  generation|  best:   array([8, 1, 9, 5])|    best child: array([8, 1, 9, 5])
+

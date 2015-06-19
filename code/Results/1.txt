@@ -1,0 +1,16 @@
+def lossf1(self):
+    cens = [] 
+    for i in range(0, 10):
+        child = self.output[T.eq(i, self.y).nonzero()]  #.reshape(-1, 10, 13, 13)  )
+        cens.append( T.sum(child, 0)/child.shape[0])
+#            cens = kinds[i]/sums[i].shape[0] 
+
+    diff = 0 
+    for i in range(10):
+        for j in range(i+1, 10):
+            diff += T.sum((cens[i] - cens[j]) ** 2)
+    return -diff
+
+k.fit(loss_functions.lossf1, datasets, batch_size = 50, n_epochs = 100, learning_rate = 0.01)
+cnn = CNN(dim_in = 1, size_in = (28, 28), nkerns = [(10, (3, 3), (2, 2))])
+
