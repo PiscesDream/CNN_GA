@@ -11,7 +11,7 @@ from time import time
 
 class extended_Queue(object):
     
-    def __init__(self, max = 500, threshold = 50):
+    def __init__(self, max = 100, threshold = 50):
         self.qs = [mp.Queue() for i in range(max)]
         self.ind = 0
         self.max = max

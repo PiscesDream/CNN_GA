@@ -1,0 +1,12 @@
+N = 5749 
+A = 50
+
+
+k = cnn(dim_in = 1, size_in = (A, A), size_out = N, 
+        nkerns = [(4, (5, 5), (2, 2)), (15, (5, 5), (2, 2))], 
+        nhiddens=[500])
+
+    print k
+k.fit(dataset, n_epochs=300, learning_rate=0.0001)
+
+

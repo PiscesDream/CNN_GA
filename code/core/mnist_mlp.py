@@ -9,6 +9,8 @@
     2015/03/26:
         add the ReLU layer
         fix the no cnn bug
+    special:
+        slient
 '''
 import cPickle
 import gzip
@@ -122,12 +124,12 @@ class cnn(object):
                  
         x = T.tensor4('x')
         y = T.ivector('y')
-        lr = T.dscalar('lr')
+        lr = T.fscalar('lr')
         i_shp = array(size_in)
         rng = random.RandomState(10)
 
         #building model
-        print '..building the model'
+#        print '..building the model'
 
         #building the cnn
         cnn_layers = []
@@ -219,8 +221,9 @@ class cnn(object):
         return theano.function([], self.errors,
                                givens={self.x : x, self.y : y})();
 
-    def fit(self, datasets, batch_size = 500, n_epochs = 200, learning_rate = 0.01):
+    def fit(self, datasets, batch_size = 500, n_epochs = 200, learning_rate = 0.01, slient=False):
         index = T.lscalar()
+        learning_rate = T.cast(learning_rate, dtype=theano.config.floatX)
 
         train_set_x, train_set_y= datasets[0]
         test_set_x, test_set_y= datasets[1]
@@ -250,17 +253,17 @@ class cnn(object):
 #        print numpy.mean([debug_f(i) for i in xrange(n_test_batches)]) 
         #raw_input(test_model())
 
-        print '...training'
+        #print '...training'
         maxiter = n_epochs
         iteration = 0
         while iteration < maxiter:
             start_time = time.time()
             iteration += 1
-            print 'iteration %d' % iteration
+            if not slient: print 'iteration %d' % iteration
             for minibatch_index in xrange(n_train_batches):
-                print '\tL of (%03d/%03d) = %f\r' % (minibatch_index, n_train_batches, train_model(minibatch_index)),
-            print ''
-            print 'error = %f' % test_model()
+                if not slient: print '\tL of (%03d/%03d) = %f\r' % (minibatch_index, n_train_batches, train_model(minibatch_index)),
+                else: train_model(minibatch_index)
+            if not slient: print '\nerror = %f' % test_model()
             self.time.append(time.time()-start_time)
 
     def __repr__(self):

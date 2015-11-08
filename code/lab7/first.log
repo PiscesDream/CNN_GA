@@ -1,0 +1,11 @@
+Elemwise{tanh,no_inplace}
+<function softmax at 0x27e3d70>
+<CNN: [(10, (5, 5), (2, 2)), (10, (5, 5), (2, 2))]; HID: [300, 5749]>
+diff accuracy: 4975 / 5000 = 0.995
+same accuracy: 4485 / 5000 = 0.897
+correct accuracy: 2054 / 5000 = 0.411
+Elemwise{tanh,no_inplace}
+<function softmax at 0x27e3d70>
+Accuracy: 498 / 500 = 0.996
+Sample = 2 (same) + 498 (diff)
+<CNN: [(10, (5, 5), (2, 2)), (10, (5, 5), (2, 2))]; HID: [300, 5749]>
