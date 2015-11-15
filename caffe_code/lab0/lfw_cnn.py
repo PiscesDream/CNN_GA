@@ -54,10 +54,16 @@ if __name__ == '__main__':
 
         # accuracy
         correct = 0
+        for i in xrange(1):
+            solver.test_nets[0].forward()
+#            solver.net.forward()
+#            print solver.net.blobs['ip2'].data.argmax(1)
+            correct += (solver.test_nets[0].blobs['ip2'].data.argmax(1) == solver.test_nets[0].blobs['label'].data).sum()
+        print 'Test:  [%04d]: %04d/1000=%.5f%%' % (it, correct, correct/1e3*1e2)
+
+        correct = 0
         for i in xrange(10):
             solver.net.forward()
-#            print solver.net.blobs['ip2'].data.argmax(1)
             correct += (solver.net.blobs['ip2'].data.argmax(1) == solver.net.blobs['label'].data).sum()
-        print '[%04d]: %04d/1000=%.5f%%' % (it, correct, correct/1e3*1e2)
-
+        print 'Train: [%04d]: %04d/1000=%.5f%%' % (it, correct, correct/1e3*1e2)
 
