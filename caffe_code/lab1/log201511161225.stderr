@@ -1,0 +1,165 @@
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I1116 13:14:41.647747  3991 solver.cpp:47] Initializing solver from parameters: 
+train_net: "./lfw_multiclass.prototxt"
+base_lr: 0.001
+display: 10
+lr_policy: "inv"
+gamma: 0.001
+power: 0.75
+momentum: 0.9
+weight_decay: 0.0002
+solver_mode: GPU
+I1116 13:14:41.647819  3991 solver.cpp:80] Creating training net from train_net file: ./lfw_multiclass.prototxt
+I1116 13:14:41.648973  3991 net.cpp:49] Initializing net from parameters: 
+state {
+  phase: TRAIN
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  transform_param {
+    scale: 0.0039215689
+  }
+  data_param {
+    source: "/home/share/shaofan/lfw_caffe/lmdb/multiclass"
+    batch_size: 100
+    backend: LMDB
+  }
+}
+layer {
+  name: "conv"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv"
+  convolution_param {
+    num_output: 10
+    kernel_size: 10
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "pool"
+  type: "Pooling"
+  bottom: "conv"
+  top: "pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "ip1"
+  type: "InnerProduct"
+  bottom: "pool"
+  top: "ip1"
+  inner_product_param {
+    num_output: 100
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "ip1"
+  top: "ip1"
+}
+layer {
+  name: "ip2"
+  type: "InnerProduct"
+  bottom: "ip1"
+  top: "ip2"
+  inner_product_param {
+    num_output: 4000
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "ip2"
+  bottom: "label"
+  top: "loss"
+}
+I1116 13:14:41.649055  3991 layer_factory.hpp:76] Creating layer data
+I1116 13:14:41.649693  3991 net.cpp:106] Creating Layer data
+I1116 13:14:41.649770  3991 net.cpp:411] data -> data
+I1116 13:14:41.649806  3991 net.cpp:411] data -> label
+I1116 13:14:41.673861  4000 db_lmdb.cpp:38] Opened lmdb /home/share/shaofan/lfw_caffe/lmdb/multiclass
+I1116 13:14:41.690349  3991 data_layer.cpp:41] output data size: 100,3,250,250
+I1116 13:14:41.923507  3991 net.cpp:150] Setting up data
+I1116 13:14:41.923584  3991 net.cpp:157] Top shape: 100 3 250 250 (18750000)
+I1116 13:14:41.923596  3991 net.cpp:157] Top shape: 100 (100)
+I1116 13:14:41.923604  3991 net.cpp:165] Memory required for data: 75000400
+I1116 13:14:41.923617  3991 layer_factory.hpp:76] Creating layer conv
+I1116 13:14:41.923648  3991 net.cpp:106] Creating Layer conv
+I1116 13:14:41.923662  3991 net.cpp:454] conv <- data
+I1116 13:14:41.923686  3991 net.cpp:411] conv -> conv
+I1116 13:14:41.948256  3991 net.cpp:150] Setting up conv
+I1116 13:14:41.948318  3991 net.cpp:157] Top shape: 100 10 241 241 (58081000)
+I1116 13:14:41.948326  3991 net.cpp:165] Memory required for data: 307324400
+I1116 13:14:41.948365  3991 layer_factory.hpp:76] Creating layer pool
+I1116 13:14:41.948390  3991 net.cpp:106] Creating Layer pool
+I1116 13:14:41.948402  3991 net.cpp:454] pool <- conv
+I1116 13:14:41.948421  3991 net.cpp:411] pool -> pool
+I1116 13:14:41.948493  3991 net.cpp:150] Setting up pool
+I1116 13:14:41.948508  3991 net.cpp:157] Top shape: 100 10 121 121 (14641000)
+I1116 13:14:41.948514  3991 net.cpp:165] Memory required for data: 365888400
+I1116 13:14:41.948523  3991 layer_factory.hpp:76] Creating layer ip1
+I1116 13:14:41.948542  3991 net.cpp:106] Creating Layer ip1
+I1116 13:14:41.948550  3991 net.cpp:454] ip1 <- pool
+I1116 13:14:41.948561  3991 net.cpp:411] ip1 -> ip1
+I1116 13:14:42.147678  3991 net.cpp:150] Setting up ip1
+I1116 13:14:42.147742  3991 net.cpp:157] Top shape: 100 100 (10000)
+I1116 13:14:42.147752  3991 net.cpp:165] Memory required for data: 365928400
+I1116 13:14:42.147778  3991 layer_factory.hpp:76] Creating layer relu1
+I1116 13:14:42.147805  3991 net.cpp:106] Creating Layer relu1
+I1116 13:14:42.147816  3991 net.cpp:454] relu1 <- ip1
+I1116 13:14:42.147830  3991 net.cpp:397] relu1 -> ip1 (in-place)
+I1116 13:14:42.147855  3991 net.cpp:150] Setting up relu1
+I1116 13:14:42.147864  3991 net.cpp:157] Top shape: 100 100 (10000)
+I1116 13:14:42.147871  3991 net.cpp:165] Memory required for data: 365968400
+I1116 13:14:42.147878  3991 layer_factory.hpp:76] Creating layer ip2
+I1116 13:14:42.147902  3991 net.cpp:106] Creating Layer ip2
+I1116 13:14:42.147912  3991 net.cpp:454] ip2 <- ip1
+I1116 13:14:42.147922  3991 net.cpp:411] ip2 -> ip2
+I1116 13:14:42.153601  3991 net.cpp:150] Setting up ip2
+I1116 13:14:42.153622  3991 net.cpp:157] Top shape: 100 4000 (400000)
+I1116 13:14:42.153630  3991 net.cpp:165] Memory required for data: 367568400
+I1116 13:14:42.153646  3991 layer_factory.hpp:76] Creating layer loss
+I1116 13:14:42.153666  3991 net.cpp:106] Creating Layer loss
+I1116 13:14:42.153674  3991 net.cpp:454] loss <- ip2
+I1116 13:14:42.153687  3991 net.cpp:454] loss <- label
+I1116 13:14:42.153698  3991 net.cpp:411] loss -> loss
+I1116 13:14:42.153720  3991 layer_factory.hpp:76] Creating layer loss
+I1116 13:14:42.155212  3991 net.cpp:150] Setting up loss
+I1116 13:14:42.155231  3991 net.cpp:157] Top shape: (1)
+I1116 13:14:42.155239  3991 net.cpp:160]     with loss weight 1
+I1116 13:14:42.155267  3991 net.cpp:165] Memory required for data: 367568404
+I1116 13:14:42.155277  3991 net.cpp:226] loss needs backward computation.
+I1116 13:14:42.155284  3991 net.cpp:226] ip2 needs backward computation.
+I1116 13:14:42.155292  3991 net.cpp:226] relu1 needs backward computation.
+I1116 13:14:42.155298  3991 net.cpp:226] ip1 needs backward computation.
+I1116 13:14:42.155306  3991 net.cpp:226] pool needs backward computation.
+I1116 13:14:42.155313  3991 net.cpp:226] conv needs backward computation.
+I1116 13:14:42.155333  3991 net.cpp:228] data does not need backward computation.
+I1116 13:14:42.155340  3991 net.cpp:270] This network produces output loss
+I1116 13:14:42.155354  3991 net.cpp:283] Network initialization done.
+I1116 13:14:42.155393  3991 solver.cpp:59] Solver scaffolding done.
+I1116 13:14:46.683749  3991 solver.cpp:236] Iteration 0, loss = 8.32625
+I1116 13:14:46.683851  3991 solver.cpp:252]     Train net output #0: loss = 8.32625 (* 1 = 8.32625 loss)
+I1116 13:14:46.683876  3991 sgd_solver.cpp:106] Iteration 0, lr = 0.001
+I1116 13:14:55.076187  3991 solver.cpp:236] Iteration 10, loss = 8.21904
+I1116 13:14:55.076267  3991 solver.cpp:252]     Train net output #0: loss = 8.21904 (* 1 = 8.21904 loss)
+I1116 13:14:55.076287  3991 sgd_solver.cpp:106] Iteration 10, lr = 0.000992565
+I1116 13:15:03.463950  3991 solver.cpp:236] Iteration 20, loss = 8.22254
+I1116 13:15:03.464037  3991 solver.cpp:252]     Train net output #0: loss = 8.22254 (* 1 = 8.22254 loss)
+I1116 13:15:03.464057  3991 sgd_solver.cpp:106] Iteration 20, lr = 0.000985258

@@ -4,7 +4,7 @@ from caffe import layers as L
 from caffe import params as P
 import numpy as np
 
-LMDB_ROOT = '/home/share/shaofan/lfw_caffe'
+LMDB_ROOT = '/home/share/shaofan/lfw_caffe/lmdb'
 TRAIN_LMDB = os.path.join(LMDB_ROOT, 'train_lmdb')
 TEST_LMDB= os.path.join(LMDB_ROOT, 'test_lmdb')
 

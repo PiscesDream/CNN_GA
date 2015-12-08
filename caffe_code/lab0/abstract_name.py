@@ -46,7 +46,7 @@ if __name__ == '__main__':
 # get all data
 #    test_x, test_y, train_x, train_y = getall()
 
-    x, y = getFromList('./lfw_rules/peopleDevTrain.txt')
+    x, y = getFromList('../lfw_rules/peopleDevTrain.txt')
     
     zipped = zip(x, y)
     random.shuffle(zipped)

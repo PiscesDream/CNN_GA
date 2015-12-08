@@ -4,7 +4,7 @@
 
 # root 
 DATA=/home/share/lfw/
-LMDB=/home/share/shaofan/lfw_caffe/
+LMDB=/home/share/shaofan/lfw_caffe/lmdb/
 TOOLS=$CAFFE_DIR/build/tools
 
 
@@ -26,7 +26,7 @@ fi
 
 echo "Destroying previous lmdb"
 
-rm -rf $LMDB/* 
+rm -rf $LMDB/*
 
 echo "Creating train lmdb..."
 

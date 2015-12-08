@@ -7,53 +7,29 @@ layer {
     scale: 0.00392156862745
   }
   data_param {
-    source: "/home/share/shaofan/lfw_caffe/lmdb/train_lmdb"
+    source: "/home/share/shaofan/lfw_caffe/lmdb/multiclass"
     batch_size: 100
     backend: LMDB
   }
 }
 layer {
-  name: "conv1"
+  name: "conv"
   type: "Convolution"
   bottom: "data"
-  top: "conv1"
+  top: "conv"
   convolution_param {
-    num_output: 15
-    kernel_size: 5
+    num_output: 10
+    kernel_size: 10
     weight_filler {
       type: "xavier"
     }
   }
 }
 layer {
-  name: "pool1"
+  name: "pool"
   type: "Pooling"
-  bottom: "conv1"
-  top: "pool1"
-  pooling_param {
-    pool: MAX
-    kernel_size: 2
-    stride: 2
-  }
-}
-layer {
-  name: "conv2"
-  type: "Convolution"
-  bottom: "pool1"
-  top: "conv2"
-  convolution_param {
-    num_output: 20
-    kernel_size: 3
-    weight_filler {
-      type: "xavier"
-    }
-  }
-}
-layer {
-  name: "pool2"
-  type: "Pooling"
-  bottom: "conv2"
-  top: "pool2"
+  bottom: "conv"
+  top: "pool"
   pooling_param {
     pool: MAX
     kernel_size: 2
@@ -63,7 +39,7 @@ layer {
 layer {
   name: "ip1"
   type: "InnerProduct"
-  bottom: "pool2"
+  bottom: "pool"
   top: "ip1"
   inner_product_param {
     num_output: 100
